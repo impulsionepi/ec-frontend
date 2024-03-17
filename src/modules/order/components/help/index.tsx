@@ -1,5 +1,5 @@
 import { Heading } from "@medusajs/ui"
-import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import ClientLink from "@modules/common/components/localized-client-link"
 import React from "react"
 
 const Help = () => {
@@ -9,12 +9,12 @@ const Help = () => {
       <div className="text-base-regular my-2">
         <ul className="gap-y-2 flex flex-col">
           <li>
-            <LocalizedClientLink href="/contact">Contact</LocalizedClientLink>
+            <ClientLink href="/contact">Contact</ClientLink>
           </li>
           <li>
-            <LocalizedClientLink href="/contact">
+            <ClientLink href="/contact">
               Returns & Exchanges
-            </LocalizedClientLink>
+            </ClientLink>
           </li>
         </ul>
       </div>

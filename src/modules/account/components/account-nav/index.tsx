@@ -10,7 +10,7 @@ import { signOut } from "@modules/account/actions"
 import User from "@modules/common/icons/user"
 import MapPin from "@modules/common/icons/map-pin"
 import Package from "@modules/common/icons/package"
-import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import ClientLink from "@modules/common/components/localized-client-link"
 
 const AccountNav = ({
   customer,
@@ -28,7 +28,7 @@ const AccountNav = ({
     <div>
       <div className="small:hidden">
         {route !== `/${countryCode}/account` ? (
-          <LocalizedClientLink
+          <ClientLink
             href="/account"
             className="flex items-center gap-x-2 text-small-regular py-2"
           >
@@ -36,7 +36,7 @@ const AccountNav = ({
               <ChevronDown className="transform rotate-90" />
               <span>Account</span>
             </>
-          </LocalizedClientLink>
+          </ClientLink>
         ) : (
           <>
             <div className="text-xl-semi mb-4 px-8">
@@ -45,7 +45,7 @@ const AccountNav = ({
             <div className="text-base-regular">
               <ul>
                 <li>
-                  <LocalizedClientLink
+                  <ClientLink
                     href="/account/profile"
                     className="flex items-center justify-between py-4 border-b border-gray-200 px-8"
                   >
@@ -56,10 +56,10 @@ const AccountNav = ({
                       </div>
                       <ChevronDown className="transform -rotate-90" />
                     </>
-                  </LocalizedClientLink>
+                  </ClientLink>
                 </li>
                 <li>
-                  <LocalizedClientLink
+                  <ClientLink
                     href="/account/addresses"
                     className="flex items-center justify-between py-4 border-b border-gray-200 px-8"
                   >
@@ -70,10 +70,10 @@ const AccountNav = ({
                       </div>
                       <ChevronDown className="transform -rotate-90" />
                     </>
-                  </LocalizedClientLink>
+                  </ClientLink>
                 </li>
                 <li>
-                  <LocalizedClientLink
+                  <ClientLink
                     href="/account/orders"
                     className="flex items-center justify-between py-4 border-b border-gray-200 px-8"
                   >
@@ -82,7 +82,7 @@ const AccountNav = ({
                       <span>Orders</span>
                     </div>
                     <ChevronDown className="transform -rotate-90" />
-                  </LocalizedClientLink>
+                  </ClientLink>
                 </li>
                 <li>
                   <button
@@ -153,14 +153,14 @@ const AccountNavLink = ({ href, route, children }: AccountNavLinkProps) => {
 
   const active = route.split(countryCode)[1] === href
   return (
-    <LocalizedClientLink
+    <ClientLink
       href={href}
       className={clx("text-ui-fg-subtle hover:text-ui-fg-base", {
         "text-ui-fg-base font-semibold": active,
       })}
     >
       {children}
-    </LocalizedClientLink>
+    </ClientLink>
   )
 }
 

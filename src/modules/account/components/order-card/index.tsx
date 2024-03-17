@@ -3,7 +3,7 @@ import { Button } from "@medusajs/ui"
 import { useMemo } from "react"
 
 import Thumbnail from "@modules/products/components/thumbnail"
-import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import ClientLink from "@modules/common/components/localized-client-link"
 import { formatAmount } from "@lib/util/prices"
 
 type OrderCardProps = {
@@ -62,9 +62,9 @@ const OrderCard = ({ order }: OrderCardProps) => {
         )}
       </div>
       <div className="flex justify-end">
-        <LocalizedClientLink href={`/account/orders/details/${order.id}`}>
+        <ClientLink href={`/account/orders/details/${order.id}`}>
           <Button variant="secondary">See details</Button>
-        </LocalizedClientLink>
+        </ClientLink>
       </div>
     </div>
   )

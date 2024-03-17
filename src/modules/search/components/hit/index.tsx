@@ -2,7 +2,7 @@ import { ProductVariant } from "@medusajs/medusa"
 import { Container, Text } from "@medusajs/ui"
 
 import Thumbnail from "@modules/products/components/thumbnail"
-import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import ClientLink from "@modules/common/components/localized-client-link"
 
 export type ProductHit = {
   id: string
@@ -21,7 +21,7 @@ type HitProps = {
 
 const Hit = ({ hit }: HitProps) => {
   return (
-    <LocalizedClientLink href={`/products/${hit.handle}`}>
+    <ClientLink href={`/products/${hit.handle}`}>
       <Container
         key={hit.id}
         className="flex sm:flex-col gap-2 w-full p-4 shadow-elevation-card-rest hover:shadow-elevation-card-hover items-center sm:justify-center"
@@ -37,7 +37,7 @@ const Hit = ({ hit }: HitProps) => {
           </div>
         </div>
       </Container>
-    </LocalizedClientLink>
+    </ClientLink>
   )
 }
 

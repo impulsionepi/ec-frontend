@@ -3,7 +3,7 @@ import { Container } from "@medusajs/ui"
 import { formatAmount } from "@lib/util/prices"
 
 import ChevronDown from "@modules/common/icons/chevron-down"
-import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import ClientLink from "@modules/common/components/localized-client-link"
 
 type OverviewProps = {
   customer: Omit<Customer, "password_hash"> | null
@@ -58,7 +58,7 @@ const Overview = ({ customer, orders }: OverviewProps) => {
                   orders.slice(0, 5).map((order) => {
                     return (
                       <li key={order.id}>
-                        <LocalizedClientLink
+                        <ClientLink
                           href={`/account/orders/details/${order.id}`}
                         >
                           <Container className="bg-gray-50 flex justify-between items-center p-4">
@@ -89,7 +89,7 @@ const Overview = ({ customer, orders }: OverviewProps) => {
                               <ChevronDown className="-rotate-90" />
                             </button>
                           </Container>
-                        </LocalizedClientLink>
+                        </ClientLink>
                       </li>
                     )
                   })

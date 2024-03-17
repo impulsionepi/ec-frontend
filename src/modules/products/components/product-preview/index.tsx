@@ -4,8 +4,7 @@ import { ProductPreviewType } from "types/global"
 
 import { retrievePricedProductById } from "@lib/data"
 import { getProductPrice } from "@lib/util/get-product-price"
-import { Region } from "@medusajs/medusa"
-import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import ClientLink from "@modules/common/components/localized-client-link"
 import Thumbnail from "../thumbnail"
 import PreviewPrice from "./price"
 
@@ -29,8 +28,8 @@ export default async function ProductPreview({
   })
 
   return (
-    <LocalizedClientLink
-      href={`/products/${productPreview.handle}`}
+    <ClientLink
+      href={`./products/${productPreview.handle}`}
       className="group"
     >
       <div>
@@ -46,6 +45,6 @@ export default async function ProductPreview({
           </div>
         </div>
       </div>
-    </LocalizedClientLink>
+    </ClientLink>
   )
 }

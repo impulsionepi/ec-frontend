@@ -7,7 +7,7 @@ import { LOGIN_VIEW } from "@modules/account/templates/login-template"
 import { signUp } from "@modules/account/actions"
 import ErrorMessage from "@modules/checkout/components/error-message"
 import { SubmitButton } from "@modules/checkout/components/submit-button"
-import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import ClientLink from "@modules/common/components/localized-client-link"
 
 type Props = {
   setCurrentView: (view: LOGIN_VIEW) => void
@@ -58,19 +58,19 @@ const Register = ({ setCurrentView }: Props) => {
         <ErrorMessage error={message} />
         <span className="text-center text-ui-fg-base text-small-regular mt-6">
           By creating an account, you agree to Medusa Store&apos;s{" "}
-          <LocalizedClientLink
+          <ClientLink
             href="/content/privacy-policy"
             className="underline"
           >
             Privacy Policy
-          </LocalizedClientLink>{" "}
+          </ClientLink>{" "}
           and{" "}
-          <LocalizedClientLink
+          <ClientLink
             href="/content/terms-of-use"
             className="underline"
           >
             Terms of Use
-          </LocalizedClientLink>
+          </ClientLink>
           .
         </span>
         <SubmitButton className="w-full mt-6">Join</SubmitButton>

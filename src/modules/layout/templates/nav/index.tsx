@@ -1,7 +1,7 @@
 import { Suspense } from "react"
 
 import { listRegions } from "@lib/data"
-import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import ClientLink from "@modules/common/components/localized-client-link"
 import CartButton from "@modules/layout/components/cart-button"
 import SideMenu from "@modules/layout/components/side-menu"
 
@@ -19,40 +19,40 @@ export default async function Nav() {
           </div>
 
           <div className="flex items-center h-full">
-            <LocalizedClientLink
+            <ClientLink
               href="/"
               className="txt-compact-xlarge-plus hover:text-ui-fg-base uppercase"
             >
               Medusa Store
-            </LocalizedClientLink>
+            </ClientLink>
           </div>
 
           <div className="flex items-center gap-x-6 h-full flex-1 basis-0 justify-end">
             <div className="hidden small:flex items-center gap-x-6 h-full">
               {process.env.FEATURE_SEARCH_ENABLED && (
-                <LocalizedClientLink
+                <ClientLink
                   className="hover:text-ui-fg-base"
                   href="/search"
                   scroll={false}
                 >
                   Search
-                </LocalizedClientLink>
+                </ClientLink>
               )}
-              <LocalizedClientLink
+              <ClientLink
                 className="hover:text-ui-fg-base"
                 href="/account"
               >
                 Account
-              </LocalizedClientLink>
+              </ClientLink>
             </div>
             <Suspense
               fallback={
-                <LocalizedClientLink
+                <ClientLink
                   className="hover:text-ui-fg-base flex gap-2"
                   href="/cart"
                 >
                   Cart (0)
-                </LocalizedClientLink>
+                </ClientLink>
               }
             >
               <CartButton />

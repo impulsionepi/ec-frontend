@@ -7,7 +7,7 @@ import SkeletonProductGrid from "@modules/skeletons/templates/skeleton-product-g
 import RefinementList from "@modules/store/components/refinement-list"
 import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
 import PaginatedProducts from "@modules/store/templates/paginated-products"
-import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import ClientLink from "@modules/common/components/localized-client-link"
 
 export default function CategoryTemplate({
   categories,
@@ -35,12 +35,12 @@ export default function CategoryTemplate({
           {parents &&
             parents.map((parent) => (
               <span key={parent.id} className="text-ui-fg-subtle">
-                <LocalizedClientLink
+                <ClientLink
                   className="mr-4 hover:text-black"
                   href={`/categories/${parent.handle}`}
                 >
                   {parent.name}
-                </LocalizedClientLink>
+                </ClientLink>
                 /
               </span>
             ))}

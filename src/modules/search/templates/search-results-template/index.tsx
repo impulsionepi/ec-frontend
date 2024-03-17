@@ -4,7 +4,7 @@ import Link from "next/link"
 import RefinementList from "@modules/store/components/refinement-list"
 import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
 import PaginatedProducts from "@modules/store/templates/paginated-products"
-import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import ClientLink from "@modules/common/components/localized-client-link"
 
 type SearchResultsTemplateProps = {
   query: string
@@ -32,12 +32,12 @@ const SearchResultsTemplate = ({
             {decodeURI(query)} ({ids.length})
           </Heading>
         </div>
-        <LocalizedClientLink
+        <ClientLink
           href="/store"
           className="txt-medium text-ui-fg-subtle hover:text-ui-fg-base"
         >
           Clear
-        </LocalizedClientLink>
+        </ClientLink>
       </div>
       <div className="flex flex-col small:flex-row small:items-start p-6">
         {ids.length > 0 ? (

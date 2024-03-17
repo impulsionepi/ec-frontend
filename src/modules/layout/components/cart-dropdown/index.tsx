@@ -10,7 +10,7 @@ import { formatAmount } from "@lib/util/prices"
 import DeleteButton from "@modules/common/components/delete-button"
 import LineItemOptions from "@modules/common/components/line-item-options"
 import LineItemPrice from "@modules/common/components/line-item-price"
-import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import ClientLink from "@modules/common/components/localized-client-link"
 import Thumbnail from "@modules/products/components/thumbnail"
 
 const CartDropdown = ({
@@ -78,10 +78,10 @@ const CartDropdown = ({
     >
       <Popover className="relative h-full">
         <Popover.Button className="h-full">
-          <LocalizedClientLink
+          <ClientLink
             className="hover:text-ui-fg-base"
             href="/cart"
-          >{`Cart (${totalItems})`}</LocalizedClientLink>
+          >{`Cart (${totalItems})`}</ClientLink>
         </Popover.Button>
         <Transition
           show={cartDropdownOpen}
@@ -112,22 +112,22 @@ const CartDropdown = ({
                         className="grid grid-cols-[122px_1fr] gap-x-4"
                         key={item.id}
                       >
-                        <LocalizedClientLink
+                        <ClientLink
                           href={`/products/${item.variant.product.handle}`}
                           className="w-24"
                         >
                           <Thumbnail thumbnail={item.thumbnail} size="square" />
-                        </LocalizedClientLink>
+                        </ClientLink>
                         <div className="flex flex-col justify-between flex-1">
                           <div className="flex flex-col flex-1">
                             <div className="flex items-start justify-between">
                               <div className="flex flex-col overflow-ellipsis whitespace-nowrap mr-4 w-[180px]">
                                 <h3 className="text-base-regular overflow-hidden text-ellipsis">
-                                  <LocalizedClientLink
+                                  <ClientLink
                                     href={`/products/${item.variant.product.handle}`}
                                   >
                                     {item.title}
-                                  </LocalizedClientLink>
+                                  </ClientLink>
                                 </h3>
                                 <LineItemOptions variant={item.variant} />
                                 <span>Quantity: {item.quantity}</span>
@@ -162,11 +162,11 @@ const CartDropdown = ({
                       })}
                     </span>
                   </div>
-                  <LocalizedClientLink href="/cart" passHref>
+                  <ClientLink href="/cart" passHref>
                     <Button className="w-full" size="large">
                       Go to cart
                     </Button>
-                  </LocalizedClientLink>
+                  </ClientLink>
                 </div>
               </>
             ) : (
@@ -177,12 +177,12 @@ const CartDropdown = ({
                   </div>
                   <span>Your shopping bag is empty.</span>
                   <div>
-                    <LocalizedClientLink href="/store">
+                    <ClientLink href="/store">
                       <>
                         <span className="sr-only">Go to all products page</span>
                         <Button onClick={close}>Explore products</Button>
                       </>
-                    </LocalizedClientLink>
+                    </ClientLink>
                   </div>
                 </div>
               </div>
