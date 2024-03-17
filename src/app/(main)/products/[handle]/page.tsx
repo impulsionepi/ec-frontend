@@ -15,34 +15,7 @@ type Props = {
   params: { countryCode: string; handle: string }
 }
 
-export async function generateStaticParams() {
-  const countryCodes = await listRegions().then((regions) =>
-    regions?.map((r) => r.countries.map((c) => c.iso_2)).flat()
-  )
 
-  if (!countryCodes) {
-    return null
-  }
-
-  const products = await Promise.all(
-    countryCodes.map((countryCode) => {
-      return getProductsList({ countryCode })
-    })
-  ).then((responses) =>
-    responses.map(({ response }) => response.products).flat()
-  )
-
-  const staticParams = countryCodes
-    ?.map((countryCode) =>
-      products.map((product) => ({
-        countryCode,
-        handle: product.handle,
-      }))
-    )
-    .flat()
-
-  return staticParams
-}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { handle } = params
@@ -66,7 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-const getPricedProductByHandle = async (handle: string, region: Region) => {
+const getPricedProductByHandle = async (handle: string) => {
   const { product } = await getProductByHandle(handle).then(
     (product) => product
   )
@@ -77,20 +50,13 @@ const getPricedProductByHandle = async (handle: string, region: Region) => {
 
   const pricedProduct = await retrievePricedProductById({
     id: product.id,
-    regionId: region.id,
   })
 
   return pricedProduct
 }
 
 export default async function ProductPage({ params }: Props) {
-  const region = await getRegion(params.countryCode)
-
-  if (!region) {
-    notFound()
-  }
-
-  const pricedProduct = await getPricedProductByHandle(params.handle, region)
+  const pricedProduct = await getPricedProductByHandle(params.handle)
 
   if (!pricedProduct) {
     notFound()
@@ -99,8 +65,6 @@ export default async function ProductPage({ params }: Props) {
   return (
     <ProductTemplate
       product={pricedProduct}
-      region={region}
-      countryCode={params.countryCode}
     />
   )
 }

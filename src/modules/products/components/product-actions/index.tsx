@@ -1,6 +1,5 @@
 "use client"
 
-import { Region } from "@medusajs/medusa"
 import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
 import { Button } from "@medusajs/ui"
 import { isEqual } from "lodash"
@@ -17,7 +16,6 @@ import ProductPrice from "../product-price"
 
 type ProductActionsProps = {
   product: PricedProduct
-  region: Region
 }
 
 export type PriceType = {
@@ -29,7 +27,6 @@ export type PriceType = {
 
 export default function ProductActions({
   product,
-  region,
 }: ProductActionsProps) {
   const [options, setOptions] = useState<Record<string, string>>({})
   const [isAdding, setIsAdding] = useState(false)
@@ -146,7 +143,7 @@ export default function ProductActions({
           )}
         </div>
 
-        <ProductPrice product={product} variant={variant} region={region} />
+        <ProductPrice product={product} variant={variant}  />
 
         <Button
           onClick={handleAddToCart}
@@ -164,7 +161,6 @@ export default function ProductActions({
         <MobileActions
           product={product}
           variant={variant}
-          region={region}
           options={options}
           updateOptions={updateOptions}
           inStock={inStock}

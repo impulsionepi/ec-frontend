@@ -84,7 +84,6 @@ export const findCheapestPrice = (variants: Variant[], region: Region) => {
   if (cheapestPrice) {
     return formatAmount({
       amount: cheapestPrice.amount,
-      region: region,
     })
   }
 
@@ -142,7 +141,6 @@ export const computeVariantPrice = ({
 
   return computeAmount({
     amount,
-    region,
     includeTaxes,
   })
 }
@@ -167,7 +165,6 @@ export const getVariantPrice = (
 
 type ComputeAmountParams = {
   amount: number
-  region: RegionInfo
   includeTaxes?: boolean
 }
 
@@ -176,12 +173,11 @@ type ComputeAmountParams = {
  */
 export const computeAmount = ({
   amount,
-  region,
   includeTaxes = true,
 }: ComputeAmountParams) => {
-  const toDecimal = convertToDecimal(amount, region)
+  const toDecimal = convertToDecimal(amount)
 
-  const taxRate = includeTaxes ? getTaxRate(region) : 0
+  const taxRate = includeTaxes ? getTaxRate() : 0
 
   const amountWithTaxes = toDecimal * (1 + taxRate)
 
@@ -190,7 +186,6 @@ export const computeAmount = ({
 
 type FormatAmountParams = {
   amount: number
-  region: RegionInfo
   includeTaxes?: boolean
   minimumFractionDigits?: number
   maximumFractionDigits?: number
@@ -202,26 +197,24 @@ type FormatAmountParams = {
  */
 export const formatAmount = ({
   amount,
-  region,
   includeTaxes = true,
   ...rest
 }: FormatAmountParams) => {
   const taxAwareAmount = computeAmount({
     amount,
-    region,
-    includeTaxes,
+    includeTaxes
   })
 
   return convertToLocale({
     amount: taxAwareAmount,
-    currency_code: region.currency_code,
+    currency_code: "brl",
     ...rest,
   })
 }
 
-const convertToDecimal = (amount: number, region: RegionInfo) => {
+const convertToDecimal = (amount: number) => {
   const divisor = noDivisionCurrencies.includes(
-    region?.currency_code?.toLowerCase()
+    "brl"
   )
     ? 1
     : 100

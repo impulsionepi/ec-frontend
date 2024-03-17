@@ -7,11 +7,9 @@ import { CalculatedVariant } from "types/medusa"
 export function getProductPrice({
   product,
   variantId,
-  region,
 }: {
   product: PricedProduct
   variantId?: string
-  region: RegionInfo
 }) {
   if (!product || !product.id) {
     throw new Error("No product provided")
@@ -25,7 +23,7 @@ export function getProductPrice({
   }
 
   const cheapestPrice = () => {
-    if (!product || !product.variants?.length || !region) {
+    if (!product || !product.variants?.length) {
       return null
     }
 
@@ -38,12 +36,10 @@ export function getProductPrice({
     return {
       calculated_price: formatAmount({
         amount: cheapestVariant.calculated_price,
-        region,
         includeTaxes: false,
       }),
       original_price: formatAmount({
         amount: cheapestVariant.original_price,
-        region,
         includeTaxes: false,
       }),
       price_type: cheapestVariant.calculated_price_type,
@@ -55,7 +51,7 @@ export function getProductPrice({
   }
 
   const variantPrice = () => {
-    if (!product || !variantId || !region) {
+    if (!product || !variantId ) {
       return null
     }
 
@@ -70,12 +66,10 @@ export function getProductPrice({
     return {
       calculated_price: formatAmount({
         amount: variant.calculated_price,
-        region,
         includeTaxes: false,
       }),
       original_price: formatAmount({
         amount: variant.original_price,
-        region,
         includeTaxes: false,
       }),
       price_type: variant.calculated_price_type,

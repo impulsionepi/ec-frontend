@@ -420,15 +420,13 @@ export const getProductsById = cache(async function ({
 
 export const retrievePricedProductById = cache(async function ({
   id,
-  regionId,
 }: {
   id: string
-  regionId: string
 }) {
   const headers = getMedusaHeaders(["products"])
 
   return medusaClient.products
-    .retrieve(`${id}?region_id=${regionId}`, headers)
+    .retrieve(id)
     .then(({ product }) => product)
     .catch((err) => {
       console.log(err)
@@ -454,11 +452,9 @@ export const getProductByHandle = cache(async function (
 export const getProductsList = cache(async function ({
   pageParam = 0,
   queryParams,
-  countryCode,
 }: {
   pageParam?: number
   queryParams?: StoreGetProductsParams
-  countryCode: string
 }): Promise<{
   response: { products: ProductPreviewType[]; count: number }
   nextPage: number | null
@@ -466,18 +462,11 @@ export const getProductsList = cache(async function ({
 }> {
   const limit = queryParams?.limit || 12
 
-  const region = await getRegion(countryCode)
-
-  if (!region) {
-    return emptyResponse
-  }
-
   const { products, count } = await medusaClient.products
     .list(
       {
         limit,
         offset: pageParam,
-        region_id: region.id,
         ...queryParams,
       },
       { next: { tags: ["products"] } }
@@ -488,7 +477,7 @@ export const getProductsList = cache(async function ({
     })
 
   const transformedProducts = products.map((product) => {
-    return transformProductPreview(product, region!)
+    return transformProductPreview(product)
   })
 
   const nextPage = count > pageParam + 1 ? pageParam + 1 : null
@@ -505,12 +494,10 @@ export const getProductsListWithSort = cache(
     page = 0,
     queryParams,
     sortBy = "created_at",
-    countryCode,
   }: {
     page?: number
     queryParams?: StoreGetProductsParams
     sortBy?: SortOptions
-    countryCode: string
   }): Promise<{
     response: { products: ProductPreviewType[]; count: number }
     nextPage: number | null
@@ -526,7 +513,6 @@ export const getProductsListWithSort = cache(
         ...queryParams,
         limit: 100,
       },
-      countryCode,
     })
 
     const sortedProducts = sortProducts(products, sortBy)

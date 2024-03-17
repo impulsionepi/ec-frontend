@@ -12,15 +12,12 @@ import PreviewPrice from "./price"
 export default async function ProductPreview({
   productPreview,
   isFeatured,
-  region,
 }: {
   productPreview: ProductPreviewType
   isFeatured?: boolean
-  region: Region
 }) {
   const pricedProduct = await retrievePricedProductById({
     id: productPreview.id,
-    regionId: region.id,
   }).then((product) => product)
 
   if (!pricedProduct) {
@@ -29,7 +26,6 @@ export default async function ProductPreview({
 
   const { cheapestPrice } = getProductPrice({
     product: pricedProduct,
-    region,
   })
 
   return (
