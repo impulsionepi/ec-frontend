@@ -107,6 +107,7 @@ export default function ProductActions({
 
   // add the selected variant to the cart
   const handleAddToCart = async () => {
+    console.log('variant', variant)
     if (!variant?.id) return null
 
     setIsAdding(true)
@@ -114,7 +115,6 @@ export default function ProductActions({
     await addToCart({
       variantId: variant.id,
       quantity: 1,
-      countryCode,
     })
 
     setIsAdding(false)

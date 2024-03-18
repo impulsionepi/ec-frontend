@@ -10,7 +10,6 @@ import {
   createCart,
   getCart,
   getProductsById,
-  getRegion,
   removeItem,
   updateCart,
   updateItem,
@@ -31,16 +30,8 @@ export async function getOrSetCart(countryCode: string) {
     cart = await getCart(cartId).then((cart) => cart)
   }
 
-  const region = await getRegion(countryCode)
-
-  if (!region) {
-    return null
-  }
-
-  const region_id = region.id
-
   if (!cart) {
-    cart = await createCart({ region_id }).then((res) => res)
+    cart = await createCart().then((res) => res)
     cart &&
       cookies().set("_medusa_cart_id", cart.id, {
         maxAge: 60 * 60 * 24 * 7,
@@ -51,8 +42,8 @@ export async function getOrSetCart(countryCode: string) {
     revalidateTag("cart")
   }
 
-  if (cart && cart?.region_id !== region_id) {
-    await updateCart(cart.id, { region_id })
+  if (cart) {
+    await updateCart(cart.id, {  })
     revalidateTag("cart")
   }
 
@@ -78,13 +69,11 @@ export async function retrieveCart() {
 export async function addToCart({
   variantId,
   quantity,
-  countryCode,
 }: {
   variantId: string
   quantity: number
-  countryCode: string
 }) {
-  const cart = await getOrSetCart(countryCode).then((cart) => cart)
+  const cart = await getOrSetCart().then((cart) => cart)
 
   if (!cart) {
     return "Missing cart ID"

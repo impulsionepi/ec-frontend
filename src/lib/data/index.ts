@@ -426,8 +426,8 @@ export const retrievePricedProductById = cache(async function ({
   const headers = getMedusaHeaders(["products"])
 
   return medusaClient.products
-    .retrieve(id)
-    .then(({ product }) => product)
+  .retrieve(`${id}?currency_code=brl`, headers)
+  .then(({ product }) => product)
     .catch((err) => {
       console.log(err)
       return null

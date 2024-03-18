@@ -7,7 +7,6 @@ import { Text, clx, useToggleState } from "@medusajs/ui"
 import { Fragment } from "react"
 
 import ClientLink from "@modules/common/components/localized-client-link"
-import CountrySelect from "../country-select"
 
 const SideMenuItems = {
   Home: "/",
@@ -17,7 +16,7 @@ const SideMenuItems = {
   Cart: "/cart",
 }
 
-const SideMenu = ({ regions }: { regions: Region[] | null }) => {
+const SideMenu = () => {
   const toggleState = useToggleState()
 
   return (
@@ -70,12 +69,6 @@ const SideMenu = ({ regions }: { regions: Region[] | null }) => {
                         onMouseEnter={toggleState.open}
                         onMouseLeave={toggleState.close}
                       >
-                        {regions && (
-                          <CountrySelect
-                            toggleState={toggleState}
-                            regions={regions}
-                          />
-                        )}
                         <ArrowRightMini
                           className={clx(
                             "transition-transform duration-150",

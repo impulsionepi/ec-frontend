@@ -57,12 +57,10 @@ const Shipping: React.FC<ShippingProps> = ({
   const handleChange = (value: string) => {
     set(value)
   }
-
   useEffect(() => {
     setIsLoading(false)
     setError(null)
   }, [isOpen])
-
   return (
     <div className="bg-white">
       <div className="flex flex-row items-center justify-between mb-6">
@@ -76,7 +74,7 @@ const Shipping: React.FC<ShippingProps> = ({
             }
           )}
         >
-          Delivery
+          Entrega
           {!isOpen && cart.shipping_methods.length > 0 && <CheckCircleSolid />}
         </Heading>
         {!isOpen &&
@@ -88,7 +86,7 @@ const Shipping: React.FC<ShippingProps> = ({
                 onClick={handleEdit}
                 className="text-ui-fg-interactive hover:text-ui-fg-interactive-hover"
               >
-                Edit
+                Editar
               </button>
             </Text>
           )}
@@ -127,7 +125,6 @@ const Shipping: React.FC<ShippingProps> = ({
                       <span className="justify-self-end text-ui-fg-base">
                         {formatAmount({
                           amount: option.amount!,
-                          region: cart?.region,
                           includeTaxes: false,
                         })}
                       </span>
@@ -151,7 +148,7 @@ const Shipping: React.FC<ShippingProps> = ({
             isLoading={isLoading}
             disabled={!cart.shipping_methods[0]}
           >
-            Continue to payment
+            Continuar para o pagamento
           </Button>
         </div>
       ) : (
@@ -160,13 +157,12 @@ const Shipping: React.FC<ShippingProps> = ({
             {cart && cart.shipping_methods.length > 0 && (
               <div className="flex flex-col w-1/3">
                 <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                  Method
+                  Metódo
                 </Text>
                 <Text className="txt-medium text-ui-fg-subtle">
                   {cart.shipping_methods[0].shipping_option.name} (
                   {formatAmount({
                     amount: cart.shipping_methods[0].price,
-                    region: cart.region,
                     includeTaxes: false,
                   })
                     .replace(/,/g, "")

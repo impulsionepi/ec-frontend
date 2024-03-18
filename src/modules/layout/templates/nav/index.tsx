@@ -1,29 +1,55 @@
 import { Suspense } from "react"
 
-import { listRegions } from "@lib/data"
+import logo from "@assets/images/logob.svg"
+
+import Image from "next/image";
+
 import ClientLink from "@modules/common/components/localized-client-link"
 import CartButton from "@modules/layout/components/cart-button"
 import SideMenu from "@modules/layout/components/side-menu"
 
 export default async function Nav() {
-  const regions = await listRegions().then((regions) => regions)
+
+
+  // <header className="bg-primary text-white items-center">
+  //       <div className="container mx-auto flex justify-between items-center px-2 py-6">
+  //         <div className="flex items-center pl-2">
+  //           <Image
+  //             src={logob}
+  //             alt="Logo"
+  //             width={150}
+  //             height={38}
+  //           />
+  //         </div>
+  //         <div className="flex items-center space-x-4">
+  //           <a href="#" className="hover:underline flex items-center">
+  //             <FontAwesomeIcon icon={faUser} />
+  //             <span className="ml-2">Faça seu login</span>
+  //           </a>
+  //         </div>
+  //       </div>
+  //     </header>
 
   return (
-    <div className="sticky top-0 inset-x-0 z-50 group">
-      <header className="relative h-16 mx-auto border-b duration-200 bg-white border-ui-border-base">
-        <nav className="content-container txt-xsmall-plus text-ui-fg-subtle flex items-center justify-between w-full h-full text-small-regular">
+      <header className="h-16 mx-auto border-b duration-200 bg-primary text-white items-center border-ui-border-base">
+        <nav className="content-container txt-xsmall-plus flex items-center justify-between w-full h-full text-small-regular">
           <div className="flex-1 basis-0 h-full flex items-center">
             <div className="h-full">
-              <SideMenu regions={regions} />
+              <SideMenu />
             </div>
           </div>
 
           <div className="flex items-center h-full">
             <ClientLink
-              href="/"
+              href="/store"
               className="txt-compact-xlarge-plus hover:text-ui-fg-base uppercase"
             >
-              Medusa Store
+               <Image
+              src={logo}
+              alt="Logo"
+              width={150}
+              height={38}
+            />
             </ClientLink>
           </div>
 
@@ -60,6 +86,5 @@ export default async function Nav() {
           </div>
         </nav>
       </header>
-    </div>
   )
 }

@@ -23,7 +23,6 @@ const CartDropdown = ({
   )
   const [cartDropdownOpen, setCartDropdownOpen] = useState(false)
 
-  const { countryCode } = useParams()
 
   const open = () => setCartDropdownOpen(true)
   const close = () => setCartDropdownOpen(false)
@@ -157,7 +156,6 @@ const CartDropdown = ({
                     <span className="text-large-semi">
                       {formatAmount({
                         amount: cartState.subtotal || 0,
-                        region: cartState.region,
                         includeTaxes: false,
                       })}
                     </span>

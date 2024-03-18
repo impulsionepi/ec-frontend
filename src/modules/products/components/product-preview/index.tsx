@@ -26,7 +26,6 @@ export default async function ProductPreview({
   const { cheapestPrice } = getProductPrice({
     product: pricedProduct,
   })
-
   return (
     <ClientLink
       href={`./products/${productPreview.handle}`}

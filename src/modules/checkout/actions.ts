@@ -16,7 +16,7 @@ import { redirect } from "next/navigation"
 export async function cartUpdate(data: StorePostCartsCartReq) {
   const cartId = cookies().get("_medusa_cart_id")?.value
 
-  if (!cartId) return "No cartId cookie found"
+  if (!cartId) return "Nenhum cookie cartId encontrado"
 
   try {
     await updateCart(cartId, data)
@@ -29,7 +29,7 @@ export async function cartUpdate(data: StorePostCartsCartReq) {
 export async function applyDiscount(code: string) {
   const cartId = cookies().get("_medusa_cart_id")?.value
 
-  if (!cartId) return "No cartId cookie found"
+  if (!cartId) return "Nenhum cookie cartId encontrado"
 
   try {
     await updateCart(cartId, { discounts: [{ code }] }).then(() => {
@@ -43,7 +43,7 @@ export async function applyDiscount(code: string) {
 export async function applyGiftCard(code: string) {
   const cartId = cookies().get("_medusa_cart_id")?.value
 
-  if (!cartId) return "No cartId cookie found"
+  if (!cartId) return "Nenhum cookie cartId encontrado"
 
   try {
     await updateCart(cartId, { gift_cards: [{ code }] }).then(() => {
@@ -57,7 +57,7 @@ export async function applyGiftCard(code: string) {
 export async function removeDiscount(code: string) {
   const cartId = cookies().get("_medusa_cart_id")?.value
 
-  if (!cartId) return "No cartId cookie found"
+  if (!cartId) return "Nenhum cookie cartId encontrado"
 
   try {
     await deleteDiscount(cartId, code)
@@ -73,7 +73,7 @@ export async function removeGiftCard(
 ) {
   const cartId = cookies().get("_medusa_cart_id")?.value
 
-  if (!cartId) return "No cartId cookie found"
+  if (!cartId) return "Nenhum cookie cartId encontrado"
 
   try {
     await updateCart(cartId, {
@@ -105,11 +105,11 @@ export async function submitDiscountForm(
 }
 
 export async function setAddresses(currentState: unknown, formData: FormData) {
-  if (!formData) return "No form data received"
+  if (!formData) return "Sem dados de formulário"
 
   const cartId = cookies().get("_medusa_cart_id")?.value
 
-  if (!cartId) return { message: "No cartId cookie found" }
+  if (!cartId) return { message: "Nenhum cookie cartId encontrado" }
 
   const data = {
     shipping_address: {
@@ -153,14 +153,14 @@ export async function setAddresses(currentState: unknown, formData: FormData) {
   }
 
   redirect(
-    `/${formData.get("shipping_address.country_code")}/checkout?step=delivery`
+    `/checkout?step=delivery`
   )
 }
 
 export async function setShippingMethod(shippingMethodId: string) {
   const cartId = cookies().get("_medusa_cart_id")?.value
 
-  if (!cartId) throw new Error("No cartId cookie found")
+  if (!cartId) throw new Error("Nenhum cookie cartId encontrado")
 
   try {
     await addShippingMethod({ cartId, shippingMethodId })
@@ -173,7 +173,7 @@ export async function setShippingMethod(shippingMethodId: string) {
 export async function setPaymentMethod(providerId: string) {
   const cartId = cookies().get("_medusa_cart_id")?.value
 
-  if (!cartId) throw new Error("No cartId cookie found")
+  if (!cartId) throw new Error("Nenhum cookie cartId encontrado")
 
   try {
     const cart = await setPaymentSession({ cartId, providerId })
@@ -187,7 +187,7 @@ export async function setPaymentMethod(providerId: string) {
 export async function placeOrder() {
   const cartId = cookies().get("_medusa_cart_id")?.value
 
-  if (!cartId) throw new Error("No cartId cookie found")
+  if (!cartId) throw new Error("Nenhum cookie cartId encontrado")
 
   let cart
 
